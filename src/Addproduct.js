@@ -67,7 +67,7 @@ const Seller = () => {
                             type="number"
                             className="form-control"
                             placeholder="Enter 0 if NOT transferable"
-                            ref={time}
+                            ref={transfer}
                         />
                     </div>
 
