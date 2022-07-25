@@ -71,7 +71,9 @@ const Login = () => {
                         </button>
                     </div>
                     <p className="forgot-password text-right w-100" >
-                        <Link className='float-end mt-3 text-warning' to='signup' >Sign Up</Link>
+                        <Link className='mt-3 text-warning' to='add-product' >Are you a seller?</Link>
+
+                        <Link className='float-end text-warning' to='signup' >Sign Up</Link>
                     </p>
                 </form>
 
