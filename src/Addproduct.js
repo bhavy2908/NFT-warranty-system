@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
+import React, { useRef, useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
+import { db } from "./firebase";
 
 const Seller = () => {
     const image = useRef(null);
@@ -11,14 +13,34 @@ const Seller = () => {
     const description = useRef(null);
     const price = useRef(null);
 
-    const handleSubmit = () => {
-        console.log("submitted")
-    };
+    
 
+    const [products, setProducts] = useState([]);
+    const productsCollectionRef = collection(db, "products");
+
+    useEffect(() => {
+        const getProducts = async () => {
+            const data = await getDocs(productsCollectionRef);
+            setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            
+        };
+
+        getProducts();
+        
+    }, []);
+
+    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await addDoc(productsCollectionRef, { f_name: name.current.value, f_price: price.current.value, f_description: description.current.value, f_time: time.current.value, f_transfer: transfer.current.value });
+        console.log(products[0].f_name)
+    };
 
     const handleUpload = () => {
         image.current?.click();
     };
+
     return (
         <div className='bg-primary' style={{ height: "100vh" }}>
             <div className='bg-primary' style={{ width: "500px", marginLeft: "auto", marginRight: "auto", paddingTop: "175px", color: "white" }}>
@@ -85,8 +107,6 @@ const Seller = () => {
                 </form>
             </div>
         </div>
-
-
     )
 }
 
