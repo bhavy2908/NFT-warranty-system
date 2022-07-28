@@ -1,20 +1,42 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from "react";
 import { auth } from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { db } from "./firebase";
+import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
 
 const Signup = () => {
     const email = useRef(null);
     const pass = useRef(null);
+    const name = useRef(null);
+    const wallet_id = useRef(null);
+    const phone = useRef(null);
+
+    const [users, setUsers] = useState([]);
+    const usersCollectionRef = collection(db, "users");
+
+    useEffect(() => {
+        const getUsers = async () => {
+            const data = await getDocs(usersCollectionRef);
+            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))            
+        };
+
+        getUsers();
+        console.log(users)  
+
+    }, []);
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const addData = async (e) => {
         e.preventDefault();
+        await addDoc(usersCollectionRef, { f_name: name.current.value, f_email: email.current.value, f_phone: phone.current.value, f_wallet: wallet_id.current.value });
+        console.log(users)
         createUserWithEmailAndPassword(auth, email.current.value, pass.current.value).then(
             (authUser) => {
                 console.log(authUser)
                 navigate('/home');
+
             }
         ).catch(
             (error) => {
@@ -23,9 +45,15 @@ const Signup = () => {
         );
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+       
+        
+    }
+
     return (
         <div className='bg-primary' style={{ height: "100vh" }}>
-            <div className='bg-primary' style={{ width: "500px", marginLeft: "auto", marginRight: "auto", paddingTop: "300px", color: "white" }}>
+            <div className='bg-primary' style={{ width: "500px", marginLeft: "auto", marginRight: "auto", paddingTop: "200px", color: "white" }}>
                 <form style={{ marginTop: "0px" }}>
                     <h3>Sign Up</h3>
                     
@@ -39,6 +67,33 @@ const Signup = () => {
                         />
                     </div>
                     <div className="mb-3">
+                        <label>Name</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            ref={name}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label>Wallet ID</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            ref={wallet_id}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label>Phone No.</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            ref={phone}
+                        />
+                    </div>
+                    <div className="mb-3">
                         <label>Password</label>
                         <input
                             type="password"
@@ -48,7 +103,7 @@ const Signup = () => {
                         />
                     </div>
                     <div className="d-grid">
-                        <button type="submit" className="btn btn-warning" onClick={handleSubmit}>
+                        <button type="submit" className="btn btn-warning" onClick={handleSubmit && addData}>
                             Sign Up
                         </button>
                     </div>

@@ -38,7 +38,7 @@ const Products = () => {
                 {products && products.map(product => {
                     return (
 
-                        <Card style={{ width: '18rem', textAlign:"center", marginRight: "40px", marginTop: "20px" }}>
+                        <Card style={{ width: '18rem', textAlign:"center", marginRight: "40px", marginTop: "20px " }}>
                             <Card.Img variant="top" src={p1} style={{ width: "260px" }} />
                             <Card.Body >
                                 <Card.Title>{product.f_name}</Card.Title>
