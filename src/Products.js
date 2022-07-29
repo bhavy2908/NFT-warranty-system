@@ -6,8 +6,12 @@ import p1 from './images/product1.png';
 import rating from './images/rating.png';
 import { db } from "./firebase";
 import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
+import productReducer from "./productReducer";
+import { SET_PRODUCT_DETAILS } from "./constants";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+    const history = useNavigate();
     const [products, setProducts] = useState([]);
     const productsCollectionRef = collection(db, "products");
 
@@ -36,9 +40,14 @@ const Products = () => {
             <div className="container">
             <div className="row">
                 {products && products.map(product => {
+                    const handleBuy = (e) => {
+                        e.preventDefault();
+                        productReducer.dispatch({type:SET_PRODUCT_DETAILS, payload:{...product}})
+                        history('/buy-now') ;
+                    }
                     return (
-
-                        <Card style={{ width: '18rem', textAlign:"center", marginRight: "40px", marginTop: "20px " }}>
+                        
+                        <Card style={{ width: '18rem', textAlign:"center", marginRight: "40px", marginTop: "20px " }} key={product.f_name}>
                             <Card.Img variant="top" src={p1} style={{ width: "260px" }} />
                             <Card.Body >
                                 <Card.Title>{product.f_name}</Card.Title>
@@ -47,7 +56,7 @@ const Products = () => {
                                     <br></br>
                                     Rs.{product.f_price}
                                 </Card.Text>
-                                <Button variant="primary">Buy Now</Button>
+                                <Button variant="primary" onClick={handleBuy}>Buy Now</Button>
                             </Card.Body>
                         </Card>
 
