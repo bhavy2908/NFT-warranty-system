@@ -6,6 +6,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Seller from './Addproduct';
 import BuyNow from './BuyNow';
+import ViewOrders from './ViewOrders';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/' element={<Login />} />
         <Route exact path='/buy-now' element={<BuyNow />} />
         <Route exact path='/add-product' element={<Seller />} />
+        <Route exact path='/orders' element={<ViewOrders />} />
       </Routes>
     </BrowserRouter>
   )

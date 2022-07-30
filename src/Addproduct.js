@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from "./firebase";
+import axios from "axios";
 
 const Seller = () => {
     const image = useRef(null);
@@ -14,10 +15,9 @@ const Seller = () => {
     const price = useRef(null);
 
     const timestamp = Date.now();
+
+    const navigate = useNavigate();
     
-    console.log(new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp));
-
-
     const [products, setProducts] = useState([]);
     const productsCollectionRef = collection(db, "products");
 
@@ -37,7 +37,13 @@ const Seller = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await addDoc(productsCollectionRef, { f_name: name.current.value, f_price: price.current.value, f_description: description.current.value, f_time: time.current.value, f_transfer: transfer.current.value, timestamp: (new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp)) });
-        console.log(products[0].f_name)
+        const res = await axios.post('http://localhost:4001/createproduct', {
+            name: name.current.value,
+            warrantyTime: time.current.value,
+            soul: transfer.current.value
+        });
+        console.log(res);
+        navigate("/");
     };
 
     const handleUpload = () => {

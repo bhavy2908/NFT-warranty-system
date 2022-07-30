@@ -11,6 +11,9 @@ import logo from './images/logo.png'
 import heart from './images/heart.gif'
 import { auth } from './firebase';
 import { signInWithEmailAndPassword, onAuthStateChanged, getAuth } from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
+
+
 
 var user_email = null
 const authh = getAuth();
@@ -21,7 +24,14 @@ onAuthStateChanged(authh, (user) => {
     } else {
     }
 });
+
+
 const Navb = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/orders')
+    }
+    
     return (
 
         <Navbar bg="primary" variant="dark" expand="lg">
@@ -49,9 +59,9 @@ const Navb = () => {
                         </Form>
 
 
-                        <NavDropdown style={{ marginLeft: "250px", color: "white" }} title={user_email} id="navbarScrollingDropdown">
+                        <NavDropdown style={{ marginLeft: "110px", color: "white" }} title={user_email} id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">
+                            <NavDropdown.Item href="" onClick={handleClick}>
                                 View Orders
                             </NavDropdown.Item>
                             <NavDropdown.Divider />

@@ -72,7 +72,7 @@ const Signup = () => {
                         <input
                             type="email"
                             className="form-control"
-                            placeholder="Enter email"
+                            placeholder="Enter name"
                             ref={name}
                         />
                     </div>
@@ -81,7 +81,7 @@ const Signup = () => {
                         <input
                             type="email"
                             className="form-control"
-                            placeholder="Enter email"
+                            placeholder="Enter wallet Id(metamask account Id)"
                             ref={wallet_id}
                         />
                     </div>
@@ -90,7 +90,7 @@ const Signup = () => {
                         <input
                             type="email"
                             className="form-control"
-                            placeholder="Enter email"
+                            placeholder="Enter Phone No."
                             ref={phone}
                         />
                     </div>

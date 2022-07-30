@@ -45,7 +45,14 @@ const BuyNow = () => {
             setTransfer('not');
         }
     }, [refresh]);
-    
+    const hideTransfer = (value) => {
+        if (value === 'not') {
+            return ('')
+        }
+        else {
+            return (<b>No. of times Warranty is transferable: {product.f_transfer}</b>)
+        }
+    }
   return (
       <div>
           <div style={{ width: "100%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
@@ -76,15 +83,15 @@ const BuyNow = () => {
               <br></br>
               Your Warranty is {transfer} Transferable.
               <br></br>
-              <b>No. of times Warranty is transferable: {product.f_transfer}</b>
+              {hideTransfer(transfer)}
               <br></br>
               <br></br>
-              <b>A digital copy of your Warranty is sent to your registerd mobile number and email.</b>
+              <b>Your warranty will be issued to you in a very short time which will be notified to you by email and a sms.</b>
               <br></br>
               To view your warranty, click the button below.
               <br></br>
               <br></br>
-              <button className='btn btn-primary'>View Warranty</button>
+              <a href="https://testnets.opensea.io/account"><button className='btn btn-primary'>View Warranty</button></a>
 
           </div>
     </div>
