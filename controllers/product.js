@@ -7,15 +7,15 @@ const Web3 = require('web3');
 const Vonage = require('@vonage/server-sdk');
 const nodemailer = require('nodemailer');
 const vonage = new Vonage({
-  apiKey: '7ce08d68',
-  apiSecret: 'QYJzBPp8DxKMTz7N'
+  apiKey: ' ',
+  apiSecret: ' '
 });
 const from = "Vonage APIs";
 
-const ACCOUNT_ADDRESS = '0x9695448338e2fD23FfE59568e20038684D4E026a';
-const PRIVATE_KEY = '0xc7e0b2e4c28026f5acc1c98fe08a807189941e44fc91159063c55c57cf6df0e3';
-const WEB3_PROVIDER_URL = 'https://rinkeby.infura.io/v3/d8dcbc716e9846ba82f8f5fc16f9c106';
-const PRIVATE_KEY2 = 'c7e0b2e4c28026f5acc1c98fe08a807189941e44fc91159063c55c57cf6df0e3';
+const ACCOUNT_ADDRESS = ' ';
+const PRIVATE_KEY = ' ';
+const WEB3_PROVIDER_URL = ' ';
+const PRIVATE_KEY2 = ' ';
 
 const web3 = new Web3(WEB3_PROVIDER_URL);
 
@@ -176,8 +176,8 @@ const productCtrl = {
           var transporter = nodemailer.createTransport({
             service: 'hotmail',
             auth: {
-              user: 'flipkartwarrantytest@hotmail.com',
-              pass: 'flipkart@nft'
+              user: ' ',
+              pass: ' '
             }
           });
 
